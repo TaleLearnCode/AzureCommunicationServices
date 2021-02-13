@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-namespace SMSFunctions
+namespace TaleLearnCode.CommunicationServices.Models
 {
-
 	public class MessageDeliveryReport
 	{
 

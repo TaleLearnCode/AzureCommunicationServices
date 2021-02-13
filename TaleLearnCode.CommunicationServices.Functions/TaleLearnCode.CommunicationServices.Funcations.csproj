@@ -3,6 +3,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <UserSecretsId>72edbedd-c0f1-4c60-95e5-0bd4b80f2287</UserSecretsId>
+    <AssemblyName>TaleLearnCode.CommunicationServices.Functions</AssemblyName>
+    <RootNamespace>TaleLearnCode.CommunicationServices.Functions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
