@@ -5,7 +5,7 @@ using System;
 
 namespace TaleLearnCode.CommunicationServices
 {
-	public class SMSService
+	public class SMSService : ISMSService
 	{
 
 		private readonly string _fromPhoneNumber;
