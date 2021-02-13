@@ -16,11 +16,11 @@ namespace SMSFunctions
 		{
 			log.LogInformation(eventGridEvent.Data.ToString());
 
-			messageDeliveryReport messageDeliveryReport = JsonConvert.DeserializeObject<messageDeliveryReport>(eventGridEvent.Data.ToString());
+			MessageDeliveryReport messageDeliveryReport = JsonConvert.DeserializeObject<MessageDeliveryReport>(eventGridEvent.Data.ToString());
 
 			// TODO: SMSService/AzureStorageSettings should injected
 			SMSService smsService = new SMSService(Settings.AzureStorageSettings);
-			smsService.AddDeliveryConfirmation(messageDeliveryReport.to, messageDeliveryReport.messageId, messageDeliveryReport.deliveryStatus, messageDeliveryReport.deliveryStatusDetails, messageDeliveryReport.receivedTimestamp);
+			smsService.AddDeliveryConfirmation(messageDeliveryReport.To, messageDeliveryReport.MessageId, messageDeliveryReport.DeliveryStatus, messageDeliveryReport.DeliveryStatusDetail, messageDeliveryReport.ReceivedTimestamp);
 
 		}
 	}

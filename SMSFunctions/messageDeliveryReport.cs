@@ -1,14 +1,29 @@
-﻿namespace SMSFunctions
+﻿using Newtonsoft.Json;
+
+namespace SMSFunctions
 {
 
-	public class messageDeliveryReport
+	public class MessageDeliveryReport
 	{
-		public string messageId { get; set; }
-		public string from { get; set; }
-		public string to { get; set; }
-		public string receivedTimestamp { get; set; }
-		public string deliveryStatus { get; set; }
-		public string deliveryStatusDetails { get; set; }
+
+		[JsonProperty("messageId")]
+		public string MessageId { get; set; }
+
+		[JsonProperty("from")]
+		public string From { get; set; }
+
+		[JsonProperty("to")]
+		public string To { get; set; }
+
+		[JsonProperty("receivedTimestamp")]
+		public string ReceivedTimestamp { get; set; }
+
+		[JsonProperty("deliveryStatus")]
+		public string DeliveryStatus { get; set; }
+
+		[JsonProperty("deliveryStatusDetails")]
+		public string DeliveryStatusDetail { get; set; }
+
 	}
 
 }
