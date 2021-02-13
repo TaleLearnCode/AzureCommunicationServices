@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProofOfConcept", "ProofOfCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaleLearnCode.CommunicationServices", "TaleLearnCode.CommunicationServices\TaleLearnCode.CommunicationServices.csproj", "{78578C3D-50FC-49FE-9837-136442EE8DA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaleLearnCode.CommunicationServices.Funcations", "TaleLearnCode.CommunicationServices.Functions\TaleLearnCode.CommunicationServices.Funcations.csproj", "{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaleLearnCode.CommunicationServices.Functions", "TaleLearnCode.CommunicationServices.Functions\TaleLearnCode.CommunicationServices.Functions.csproj", "{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
