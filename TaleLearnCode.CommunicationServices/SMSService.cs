@@ -3,14 +3,14 @@ using Azure.Communication;
 using Azure.Communication.Sms;
 using System;
 
-namespace TaleLearnCode.Azure
+namespace TaleLearnCode.CommunicationServices
 {
 	public class SMSService
 	{
 
-		private string _fromPhoneNumber;
-		private SmsClient _smsClient;
-		private AzureStorageSettings _azureStorageSettings;
+		private readonly string _fromPhoneNumber;
+		private readonly SmsClient _smsClient;
+		private readonly AzureStorageSettings _azureStorageSettings;
 
 		public SMSService(string serviceConnectionString, AzureStorageSettings azureStorageSettings, string fromPhoneNumber)
 		{
@@ -37,7 +37,7 @@ namespace TaleLearnCode.Azure
 				from: new PhoneNumber(_fromPhoneNumber),
 				to: new PhoneNumber(toPhoneNumber),
 				message: message,
-				new SendSmsOptions { EnableDeliveryReport = true });
+				new SendSmsOptions { EnableDeliveryReport = enableDeliveryReport });
 
 			SMSMessage.Save(new SMSMessage(_fromPhoneNumber, toPhoneNumber, message, response.Value.MessageId), _azureStorageSettings);
 

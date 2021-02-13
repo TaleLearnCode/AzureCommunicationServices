@@ -1,6 +1,4 @@
-﻿using TaleLearnCode.Azure;
-
-namespace SMSFunctions
+﻿namespace TaleLearnCode.CommunicationServices
 {
 	public static class Settings
 	{

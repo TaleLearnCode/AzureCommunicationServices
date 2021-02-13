@@ -1,7 +1,7 @@
 ﻿using Azure.Data.Tables;
 using System;
 
-namespace TaleLearnCode.Azure
+namespace TaleLearnCode.CommunicationServices
 {
 	public static class AzureStorageHelper
 	{

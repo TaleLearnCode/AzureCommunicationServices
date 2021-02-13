@@ -3,7 +3,7 @@ using Azure.Data.Tables;
 using System;
 using System.Linq;
 
-namespace TaleLearnCode.Azure
+namespace TaleLearnCode.CommunicationServices
 {
 	public class SMSMessage : ITableEntity
 	{

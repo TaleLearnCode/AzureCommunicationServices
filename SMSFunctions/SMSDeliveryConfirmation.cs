@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.EventGrid;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using TaleLearnCode.Azure;
+using TaleLearnCode.CommunicationServices;
 
 namespace SMSFunctions
 {

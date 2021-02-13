@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TLC.Azure.CommunicationServices\TLC.Azure.CommunicationServices.csproj" />
+    <ProjectReference Include="..\TaleLearnCode.CommunicationServices\TaleLearnCode.CommunicationServices.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

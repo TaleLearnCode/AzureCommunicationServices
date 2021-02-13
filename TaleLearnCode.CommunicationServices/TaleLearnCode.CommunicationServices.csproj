@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>TaleLearnCode.Azure.CommunicationServices</AssemblyName>
-    <RootNamespace>TaleLearnCode.Azure</RootNamespace>
+    <AssemblyName>TaleLearnCode.CommunicationServices</AssemblyName>
+    <RootNamespace>TaleLearnCode.CommunicationServices</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

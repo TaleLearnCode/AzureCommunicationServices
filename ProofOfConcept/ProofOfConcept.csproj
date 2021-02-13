@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TLC.Azure.CommunicationServices\TLC.Azure.CommunicationServices.csproj" />
+    <ProjectReference Include="..\TaleLearnCode.CommunicationServices\TaleLearnCode.CommunicationServices.csproj" />
   </ItemGroup>
 
 </Project>
