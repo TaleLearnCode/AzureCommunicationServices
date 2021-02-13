@@ -1,4 +1,6 @@
-﻿namespace TaleLearnCode.CommunicationServices
+﻿using TaleLearnCode.CommunicationServices.Models;
+
+namespace TaleLearnCode.CommunicationServices
 {
 	public interface ISMSService
 	{

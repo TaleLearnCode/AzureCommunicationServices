@@ -2,6 +2,8 @@
 using Azure.Communication;
 using Azure.Communication.Sms;
 using System;
+using TaleLearnCode.CommunicationServices.AzureStorage;
+using TaleLearnCode.CommunicationServices.Models;
 
 namespace TaleLearnCode.CommunicationServices
 {
@@ -39,7 +41,7 @@ namespace TaleLearnCode.CommunicationServices
 				message: message,
 				new SendSmsOptions { EnableDeliveryReport = enableDeliveryReport });
 
-			SMSMessage.Save(new SMSMessage(_fromPhoneNumber, toPhoneNumber, message, response.Value.MessageId), _azureStorageSettings);
+			SMSMessageTableEntity.Save(new SMSMessageTableEntity(_fromPhoneNumber, toPhoneNumber, message, response.Value.MessageId), _azureStorageSettings);
 
 			return response.Value.MessageId;
 
@@ -47,16 +49,16 @@ namespace TaleLearnCode.CommunicationServices
 
 		public void AddDeliveryConfirmation(string toPhoneNumber, string messageId, string deliveryStatus, string deliveryStatusDetail, string receivedTimestamp)
 		{
-			SMSMessage smsMessage = SMSMessage.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
+			SMSMessage smsMessage = SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
 			smsMessage.DeliveryStatus = deliveryStatus;
 			smsMessage.DeliveryStatusDetail = deliveryStatusDetail;
 			smsMessage.ReceivedTimestamp = receivedTimestamp;
-			SMSMessage.Save(smsMessage, _azureStorageSettings);
+			SMSMessageTableEntity.Save(smsMessage, _azureStorageSettings);
 		}
 
 		public SMSMessage RetrieveSentMessage(string toPhoneNumber, string messageId)
 		{
-			return SMSMessage.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
+			return SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
 		}
 
 
