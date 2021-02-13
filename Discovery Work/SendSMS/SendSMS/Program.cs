@@ -13,8 +13,8 @@ namespace SendSMS
 				from: new PhoneNumber(Settings.ACSPhoneNumber),
 				to: new PhoneNumber(Settings.ConsumerPhoneNumber),
 				//message: "Hello World via SMS",
-				message: "Azure Functions for the win!!!"//,
-				//new SendSmsOptions { EnableDeliveryReport = true } // optional
+				message: "Azure Functions for the win!!!",
+				new SendSmsOptions { EnableDeliveryReport = true } // optional
 			);
 
 			Console.WriteLine("Message sent");
