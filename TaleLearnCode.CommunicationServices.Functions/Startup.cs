@@ -28,7 +28,7 @@ namespace TaleLearnCode.CommunicationServices.Functions
 
 			builder.Services.AddSingleton<ISMSService>((s) =>
 			{
-				return new SMSService(azureStorageSettings);
+				return new SMSService(Environment.GetEnvironmentVariable("ACSConnectionString"), azureStorageSettings, Environment.GetEnvironmentVariable("MessageArchiveTable"), Environment.GetEnvironmentVariable("ACSPhoneNumber"));
 			});
 
 		}

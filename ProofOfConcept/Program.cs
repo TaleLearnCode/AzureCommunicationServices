@@ -1,5 +1,6 @@
 ﻿using System;
 using TaleLearnCode.CommunicationServices;
+using TaleLearnCode.CommunicationServices.Models;
 
 namespace ProofOfConcept
 {
@@ -24,7 +25,7 @@ namespace ProofOfConcept
 			Console.WriteLine("Message:");
 			string message = Console.ReadLine();
 
-			SMSService smsService = new SMSService(Settings.ACSConnectionString, Settings.AzureStorageSettings, Settings.ACSPhoneNumber);
+			SMSService smsService = new SMSService(Settings.ACSConnectionString, Settings.AzureStorageSettings, Settings.MessageArchiveTable, Settings.ACSPhoneNumber);
 			string messageId = smsService.SendSMS(phoneNumber, message, true);
 			Console.WriteLine();
 			Console.WriteLine("Message sent");
@@ -34,6 +35,7 @@ namespace ProofOfConcept
 			Console.ReadKey();
 
 		}
+
 
 
 	}

@@ -62,24 +62,14 @@ namespace TaleLearnCode.CommunicationServices.AzureStorage
 			MessageId = messageId;
 		}
 
-		public SMSMessageTableEntity(SMSMessage smsMessage)
+		public static void Save(SMSMessageTableEntity smsMessageTableEntity, AzureStorageSettings azureStorageSettings, string messageArchiveTable)
 		{
-			PartitionKey = smsMessage.ToPhoneNumber;
-			RowKey = smsMessage.MessageId;
-			FromPhoneNumber = smsMessage.FromPhoneNumber;
-			ToPhoneNumber = smsMessage.ToPhoneNumber;
-			Message = smsMessage.Message;
-			MessageId = smsMessage.MessageId;
+			Helper.GetTableClient(azureStorageSettings, messageArchiveTable).UpsertEntity(smsMessageTableEntity);
 		}
 
-		public static void Save(SMSMessage smsMessage, AzureStorageSettings azureStorageSettings)
+		public static SMSMessage Retrieve(string toPhoneNumber, string messageId, AzureStorageSettings azureStorageSettings, string messageArchiveTable)
 		{
-			Helper.GetTableClient(azureStorageSettings, "SentMessages").UpsertEntity(new SMSMessageTableEntity(smsMessage));
-		}
-
-		public static SMSMessage Retrieve(string toPhoneNumber, string messageId, AzureStorageSettings azureStorageSettings)
-		{
-			SMSMessageTableEntity results = Helper.GetTableClient(azureStorageSettings, "SentMessages")
+			SMSMessageTableEntity results = Helper.GetTableClient(azureStorageSettings, messageArchiveTable)
 				.Query<SMSMessageTableEntity>(t => t.PartitionKey == toPhoneNumber && t.RowKey == messageId)
 				.SingleOrDefault();
 			if (results != null)

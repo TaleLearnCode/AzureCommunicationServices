@@ -13,6 +13,6 @@ namespace ProofOfConcept
 			AccountName = "stazurecommservices",
 			Url = "https://stazurecommservices.table.core.windows.net"
 		};
-
+		public static string MessageArchiveTable = "Messages";
 	}
 }

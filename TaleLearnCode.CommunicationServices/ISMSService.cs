@@ -36,6 +36,12 @@ namespace TaleLearnCode.CommunicationServices
 		/// <returns>A <c>string</c> representing the message identifier.</returns>
 		string SendSMS(string toPhoneNumber, string message, bool enableDeliveryReport = true);
 
+		/// <summary>
+		/// Processes an incoming SMS message.
+		/// </summary>
+		/// <param name="smsMessage">The SMS message to be processed.</param>
+		void ProcessIncomingMessage(IncomingMessage incomingMessage);
+
 	}
 
 }

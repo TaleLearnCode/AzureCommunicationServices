@@ -3,6 +3,7 @@ using Azure.Communication;
 using Azure.Communication.Sms;
 using System;
 using TaleLearnCode.CommunicationServices.AzureStorage;
+using TaleLearnCode.CommunicationServices.Extensions;
 using TaleLearnCode.CommunicationServices.Models;
 
 namespace TaleLearnCode.CommunicationServices
@@ -18,27 +19,32 @@ namespace TaleLearnCode.CommunicationServices
 		private readonly string _fromPhoneNumber;
 		private readonly SmsClient _smsClient;
 		private readonly AzureStorageSettings _azureStorageSettings;
+		private readonly string _messageArchiveTable;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SMSService"/> class.
 		/// </summary>
 		/// <param name="serviceConnectionString">The configuration for connecting to the SMS service.</param>
 		/// <param name="azureStorageSettings"><see cref="AzureStorageSettings"/> representing the setting necessary for connecting to the associated Azure Storage account.</param>
+		/// <param name="messageArchiveTable">Name of the Azure Storage table where to store the message archive.</param>
 		/// <param name="fromPhoneNumber">The phone number to use for sending SMS messages.</param>
-		public SMSService(string serviceConnectionString, AzureStorageSettings azureStorageSettings, string fromPhoneNumber)
+		public SMSService(string serviceConnectionString, AzureStorageSettings azureStorageSettings, string messageArchiveTable, string fromPhoneNumber)
 		{
 			_fromPhoneNumber = fromPhoneNumber;
 			_smsClient = new SmsClient(serviceConnectionString);
 			_azureStorageSettings = azureStorageSettings;
+			_messageArchiveTable = messageArchiveTable;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SMSService"/> class.
 		/// </summary>
 		/// <param name="azureStorageSettings">The azure storage settings.</param>
-		public SMSService(AzureStorageSettings azureStorageSettings)
+		/// <param name="messageArchiveTable">Name of the Azure Storage table where to store the message archive.</param>
+		public SMSService(AzureStorageSettings azureStorageSettings, string messageArchiveTable)
 		{
 			_azureStorageSettings = azureStorageSettings;
+			_messageArchiveTable = messageArchiveTable;
 		}
 
 		/// <summary>
@@ -61,7 +67,16 @@ namespace TaleLearnCode.CommunicationServices
 				message: message,
 				new SendSmsOptions { EnableDeliveryReport = enableDeliveryReport });
 
-			SMSMessageTableEntity.Save(new SMSMessageTableEntity(_fromPhoneNumber, toPhoneNumber, message, response.Value.MessageId), _azureStorageSettings);
+			SMSMessageTableEntity.Save(
+				new SMSMessage()
+				{
+					FromPhoneNumber = _fromPhoneNumber,
+					ToPhoneNumber = toPhoneNumber,
+					Message = message,
+					MessageId = response.Value.MessageId
+				}.ToSMSMessageTableEntity(),
+				_azureStorageSettings,
+				_messageArchiveTable);
 
 			return response.Value.MessageId;
 
@@ -77,11 +92,11 @@ namespace TaleLearnCode.CommunicationServices
 		/// <param name="receivedTimestamp">Timestamp when the message was received.</param>
 		public void AddDeliveryConfirmation(string toPhoneNumber, string messageId, string deliveryStatus, string deliveryStatusDetail, string receivedTimestamp)
 		{
-			SMSMessage smsMessage = SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
+			SMSMessage smsMessage = SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings, _messageArchiveTable);
 			smsMessage.DeliveryStatus = deliveryStatus;
 			smsMessage.DeliveryStatusDetail = deliveryStatusDetail;
 			smsMessage.ReceivedTimestamp = receivedTimestamp;
-			SMSMessageTableEntity.Save(smsMessage, _azureStorageSettings);
+			SMSMessageTableEntity.Save(smsMessage.ToSMSMessageTableEntity(), _azureStorageSettings, _messageArchiveTable);
 		}
 
 		/// <summary>
@@ -94,9 +109,33 @@ namespace TaleLearnCode.CommunicationServices
 		/// </returns>
 		public SMSMessage RetrieveSentMessage(string toPhoneNumber, string messageId)
 		{
-			return SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings);
+			return SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings, _messageArchiveTable);
 		}
 
+		public void ProcessIncomingMessage(IncomingMessage incomingMessage)
+		{
+			string message = incomingMessage.Message.ToLower();
+			string returnMessage = string.Empty;
+			if (message.Contains("price")
+				|| message.Contains("pricing")
+				|| message.Contains("cost")
+				|| message.Contains("rate")
+				|| message.Contains("how much"))
+			{
+				// Add a follow up task within CRM
+				returnMessage = "Thank you for inquiring about Atria Stony Brook. Rental rates can be found at: https://www.atriaseniorliving.com/retirement-communities/atria-stony-brook-louisville-ky/#iframePricing";
+			}
+			else if (message.Contains("schedule") || message.Contains("tour"))
+			{
+				// Add a schedule virtual tour task within CRM
+				returnMessage = "Someone will be contacting you very soon to schedule a virtual tour.";
+			}
+
+			SendSMS(incomingMessage.From, returnMessage, true);
+
+			SMSMessageTableEntity.Save(incomingMessage.ToSMSMessageTableEntity(), _azureStorageSettings, _messageArchiveTable);
+
+		}
 
 	}
 
