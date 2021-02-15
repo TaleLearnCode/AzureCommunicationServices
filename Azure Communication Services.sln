@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31004.235
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discovery Work", "Discovery Work", "{F1782128-6F5A-4EE8-B687-05F698159BE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SendSMS", "Discovery Work\SendSMS\SendSMS\SendSMS.csproj", "{CF3FDD2F-BF29-4B79-B142-E36657C9226C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestFunction", "Discovery Work\TestFunction\TestFunction\TestFunction.csproj", "{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProofOfConcept", "ProofOfConcept\ProofOfConcept.csproj", "{87BB6098-223B-4248-B8C2-828B9D777F77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaleLearnCode.CommunicationServices", "TaleLearnCode.CommunicationServices\TaleLearnCode.CommunicationServices.csproj", "{78578C3D-50FC-49FE-9837-136442EE8DA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaleLearnCode.CommunicationServices.Functions", "TaleLearnCode.CommunicationServices.Functions\TaleLearnCode.CommunicationServices.Functions.csproj", "{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF3FDD2F-BF29-4B79-B142-E36657C9226C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3FDD2F-BF29-4B79-B142-E36657C9226C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3FDD2F-BF29-4B79-B142-E36657C9226C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3FDD2F-BF29-4B79-B142-E36657C9226C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87BB6098-223B-4248-B8C2-828B9D777F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87BB6098-223B-4248-B8C2-828B9D777F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87BB6098-223B-4248-B8C2-828B9D777F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87BB6098-223B-4248-B8C2-828B9D777F77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78578C3D-50FC-49FE-9837-136442EE8DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78578C3D-50FC-49FE-9837-136442EE8DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78578C3D-50FC-49FE-9837-136442EE8DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78578C3D-50FC-49FE-9837-136442EE8DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE63B8D-13B5-4CC9-AA3C-CF90A16BBC50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF3FDD2F-BF29-4B79-B142-E36657C9226C} = {F1782128-6F5A-4EE8-B687-05F698159BE4}
+		{4EF0D132-3B57-4F98-9D15-A2E2FEC362EC} = {F1782128-6F5A-4EE8-B687-05F698159BE4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2FF344B-F4FB-4481-B382-154D112F9B66}
+	EndGlobalSection
+EndGlobal
