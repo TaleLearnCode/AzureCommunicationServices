@@ -50,19 +50,40 @@ namespace TaleLearnCode.CommunicationServices
 		/// <summary>
 		/// Sends the specified SMS message.
 		/// </summary>
-		/// <param name="toPhoneNumber">The recipient's phone number.</param>
+		/// <param name="toPhoneNumber">The destination phone number.</param>
 		/// <param name="message">Text of the message to be sent.</param>
 		/// <param name="enableDeliveryReport">If set to <c>true</c> the delivery report will be enabled.</param>
-		/// <returns>A <c>string</c> representing the message identifier.</returns>
-		/// <exception cref="Exception">Thrown if the SMS client or originating phone number was not initialized correctly.</exception>
+		/// <returns>A <c>string</c> representing the sent message identifier.</returns>
+		/// <exception cref="Exception">Thrown if the originating phone number is not initialized.</exception>
 		public string SendSMS(string toPhoneNumber, string message, bool enableDeliveryReport = true)
 		{
-
-			if (_smsClient is null) throw new Exception("The SMS Client was not initialized correctly.");
 			if (string.IsNullOrWhiteSpace(_fromPhoneNumber)) throw new Exception("Need to initialize the from phone number first.");
+			return SendSMS(_fromPhoneNumber, toPhoneNumber, message, enableDeliveryReport);
+		}
+
+		/// <summary>
+		/// Sends the specified SMS message.
+		/// </summary>
+		/// <param name="fromPhoneNumber">The origin phone number</param>
+		/// <param name="toPhoneNumber">The destination phone number.</param>
+		/// <param name="message">Text of the message to be sent.</param>
+		/// <param name="enableDeliveryReport">If set to <c>true</c> the delivery report will be enabled.</param>
+		/// <returns>A <c>string</c> representing the sent message identifier.</returns>
+		/// <exception cref="ArgumentNullException">
+		/// Thrown if <paramref name="fromPhoneNumber"/>, <paramref name="toPhoneNumber"/>,
+		/// or <paramref name="message"/> are not specified.
+		/// </exception>
+		/// <exception cref="Exception">Thrown if the SMS client was not initialized correctly.</exception>
+		public string SendSMS(string fromPhoneNumber, string toPhoneNumber, string message, bool enableDeliveryReport = true)
+		{
+
+			if (string.IsNullOrWhiteSpace(fromPhoneNumber)) throw new ArgumentNullException(nameof(fromPhoneNumber));
+			if (string.IsNullOrWhiteSpace(toPhoneNumber)) throw new ArgumentNullException(nameof(toPhoneNumber));
+			if (string.IsNullOrWhiteSpace(message)) throw new ArgumentNullException(nameof(message));
+			if (_smsClient is null) throw new Exception("The SMS Client was not initialized correctly.");
 
 			Response<SendSmsResponse> response = _smsClient.Send(
-				from: new PhoneNumber(_fromPhoneNumber),
+				from: new PhoneNumber(fromPhoneNumber),
 				to: new PhoneNumber(toPhoneNumber),
 				message: message,
 				new SendSmsOptions { EnableDeliveryReport = enableDeliveryReport });
@@ -140,7 +161,7 @@ namespace TaleLearnCode.CommunicationServices
 				returnMessage = "Thank you for inquiring about Atria Stony Brook.  Someone will be getting back to you really soon.";
 			}
 
-			SendSMS(incomingMessage.From, returnMessage, true);
+			SendSMS(incomingMessage.To, incomingMessage.From, returnMessage, true);
 
 			SMSMessageTableEntity.Save(incomingMessage.ToSMSMessageTableEntity(), _azureStorageSettings, _messageArchiveTable);
 
