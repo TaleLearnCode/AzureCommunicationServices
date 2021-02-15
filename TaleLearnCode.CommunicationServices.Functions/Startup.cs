@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using TaleLearnCode.CommunicationServices.Models;
 
 [assembly: FunctionsStartup(typeof(TaleLearnCode.CommunicationServices.Functions.Startup))]
 namespace TaleLearnCode.CommunicationServices.Functions

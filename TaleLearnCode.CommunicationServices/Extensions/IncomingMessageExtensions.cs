@@ -5,17 +5,17 @@ namespace TaleLearnCode.CommunicationServices.Extensions
 {
 
 	/// <summary>
-	/// Provides extensions to the <see cref="IncomingMessage"/> type.
+	/// Provides extensions to the <see cref="IncomingSMSMessage"/> type.
 	/// </summary>
 	public static class IncomingMessageExtensions
 	{
 
 		/// <summary>
-		/// Converts the <see cref="IncomingMessage"/> to a <see cref="SMSMessage"/>.
+		/// Converts the <see cref="IncomingSMSMessage"/> to a <see cref="SMSMessage"/>.
 		/// </summary>
 		/// <param name="incomingMessage">The incoming message to be converted.</param>
 		/// <returns>A <see cref="SMSMessage"/> representing the <paramref name="incomingMessage"/>.</returns>
-		public static SMSMessage ToSMSMessage(this IncomingMessage incomingMessage)
+		public static SMSMessage ToSMSMessage(this IncomingSMSMessage incomingMessage)
 		{
 			return new SMSMessage()
 			{
@@ -28,11 +28,11 @@ namespace TaleLearnCode.CommunicationServices.Extensions
 		}
 
 		/// <summary>
-		/// Converts the <see cref="IncomingMessage"/> to a <see cref="SMSMessageTableEntity"/>.
+		/// Converts the <see cref="IncomingSMSMessage"/> to a <see cref="SMSMessageTableEntity"/>.
 		/// </summary>
 		/// <param name="incomingMessage">The incoming message to be converted.</param>
 		/// <returns>A <see cref="SMSMessageTableEntity"/> representing the <paramref name="incomingMessage"/>.</returns>
-		public static SMSMessageTableEntity ToSMSMessageTableEntity(this IncomingMessage incomingMessage)
+		public static SMSMessageTableEntity ToSMSMessageTableEntity(this IncomingSMSMessage incomingMessage)
 		{
 			return new SMSMessageTableEntity()
 			{

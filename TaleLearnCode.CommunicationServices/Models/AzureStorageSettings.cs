@@ -1,5 +1,6 @@
-﻿namespace TaleLearnCode.CommunicationServices
+﻿namespace TaleLearnCode.CommunicationServices.Models
 {
+
 	/// <summary>
 	/// Represents the settings for connecting to the Twitch Command Azure Storage settings.
 	/// </summary>

@@ -37,7 +37,7 @@ namespace TaleLearnCode.CommunicationServices.Functions
 		public void Run([EventGridTrigger] EventGridEvent eventGridEvent, ILogger log)
 		{
 			log.LogInformation(eventGridEvent.Data.ToString());
-			IncomingMessage incomingMessage = JsonConvert.DeserializeObject<IncomingMessage>(eventGridEvent.Data.ToString());
+			IncomingSMSMessage incomingMessage = JsonConvert.DeserializeObject<IncomingSMSMessage>(eventGridEvent.Data.ToString());
 			_smsService.ProcessIncomingMessage(incomingMessage);
 		}
 

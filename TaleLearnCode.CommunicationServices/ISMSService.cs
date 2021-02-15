@@ -39,8 +39,8 @@ namespace TaleLearnCode.CommunicationServices
 		/// <summary>
 		/// Processes an incoming SMS message.
 		/// </summary>
-		/// <param name="smsMessage">The SMS message to be processed.</param>
-		void ProcessIncomingMessage(IncomingMessage incomingMessage);
+		/// <param name="incomingMessage">The incoming message.</param>
+		void ProcessIncomingMessage(IncomingSMSMessage incomingMessage);
 
 	}
 

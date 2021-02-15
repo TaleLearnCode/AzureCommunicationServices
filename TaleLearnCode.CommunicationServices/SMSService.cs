@@ -112,10 +112,14 @@ namespace TaleLearnCode.CommunicationServices
 			return SMSMessageTableEntity.Retrieve(toPhoneNumber, messageId, _azureStorageSettings, _messageArchiveTable);
 		}
 
-		public void ProcessIncomingMessage(IncomingMessage incomingMessage)
+		/// <summary>
+		/// Processes an incoming SMS message.
+		/// </summary>
+		/// <param name="incomingMessage">The incoming message.</param>
+		public void ProcessIncomingMessage(IncomingSMSMessage incomingMessage)
 		{
 			string message = incomingMessage.Message.ToLower();
-			string returnMessage = string.Empty;
+			string returnMessage;
 			if (message.Contains("price")
 				|| message.Contains("pricing")
 				|| message.Contains("cost")
@@ -129,6 +133,11 @@ namespace TaleLearnCode.CommunicationServices
 			{
 				// Add a schedule virtual tour task within CRM
 				returnMessage = "Someone will be contacting you very soon to schedule a virtual tour.";
+			}
+			else
+			{
+				// Add a follow up task within CRM
+				returnMessage = "Thank you for inquiring about Atria Stony Brook.  Someone will be getting back to you really soon.";
 			}
 
 			SendSMS(incomingMessage.From, returnMessage, true);

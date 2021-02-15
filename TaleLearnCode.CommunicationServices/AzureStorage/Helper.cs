@@ -1,5 +1,6 @@
 ﻿using Azure.Data.Tables;
 using System;
+using TaleLearnCode.CommunicationServices.Models;
 
 namespace TaleLearnCode.CommunicationServices.AzureStorage
 {

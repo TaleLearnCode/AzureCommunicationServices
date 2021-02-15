@@ -1,4 +1,4 @@
-﻿using TaleLearnCode.CommunicationServices;
+﻿using TaleLearnCode.CommunicationServices.Models;
 
 namespace ProofOfConcept
 {
