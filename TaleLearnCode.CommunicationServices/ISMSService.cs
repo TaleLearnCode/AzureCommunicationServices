@@ -40,7 +40,7 @@ namespace TaleLearnCode.CommunicationServices
 		/// Processes an incoming SMS message.
 		/// </summary>
 		/// <param name="incomingMessage">The incoming message.</param>
-		void ProcessIncomingMessage(IncomingSMSMessage incomingMessage);
+		string ProcessIncomingMessage(IncomingSMSMessage incomingMessage);
 
 	}
 

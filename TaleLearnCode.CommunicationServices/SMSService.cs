@@ -137,8 +137,11 @@ namespace TaleLearnCode.CommunicationServices
 		/// Processes an incoming SMS message.
 		/// </summary>
 		/// <param name="incomingMessage">The incoming message.</param>
-		public void ProcessIncomingMessage(IncomingSMSMessage incomingMessage)
+		public string ProcessIncomingMessage(IncomingSMSMessage incomingMessage)
 		{
+
+			IncomingSMSEventType incomingSMSEventType;
+
 			string message = incomingMessage.Message.ToLower();
 			string returnMessage;
 			if (message.Contains("price")
@@ -147,23 +150,30 @@ namespace TaleLearnCode.CommunicationServices
 				|| message.Contains("rate")
 				|| message.Contains("how much"))
 			{
-				// Add a follow up task within CRM
+				incomingSMSEventType = IncomingSMSEventType.PriceInquiry;
 				returnMessage = "Thank you for inquiring about Atria Stony Brook. Rental rates can be found at: https://www.atriaseniorliving.com/retirement-communities/atria-stony-brook-louisville-ky/#iframePricing";
 			}
 			else if (message.Contains("schedule") || message.Contains("tour"))
 			{
-				// Add a schedule virtual tour task within CRM
+				incomingSMSEventType = IncomingSMSEventType.ScheduleTour;
 				returnMessage = "Someone will be contacting you very soon to schedule a virtual tour.";
 			}
 			else
 			{
-				// Add a follow up task within CRM
+				incomingSMSEventType = IncomingSMSEventType.Unknown;
 				returnMessage = "Thank you for inquiring about Atria Stony Brook.  Someone will be getting back to you really soon.";
 			}
 
 			SendSMS(incomingMessage.To, incomingMessage.From, returnMessage, true);
 
 			SMSMessageTableEntity.Save(incomingMessage.ToSMSMessageTableEntity(), _azureStorageSettings, _messageArchiveTable);
+
+			return incomingSMSEventType switch
+			{
+				IncomingSMSEventType.PriceInquiry => "Add a follow up task within CRM",
+				IncomingSMSEventType.ScheduleTour => "Add a schedule virtual tour task within CRM",
+				_ => "Add a follow up task within CRM",
+			};
 
 		}
 

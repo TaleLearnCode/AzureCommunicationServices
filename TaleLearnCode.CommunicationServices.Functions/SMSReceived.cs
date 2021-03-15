@@ -5,7 +5,6 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.EventGrid;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using TaleLearnCode.CommunicationServices.Extensions;
 using TaleLearnCode.CommunicationServices.Models;
 
 namespace TaleLearnCode.CommunicationServices.Functions
@@ -36,9 +35,9 @@ namespace TaleLearnCode.CommunicationServices.Functions
 		[FunctionName("SMSReceived")]
 		public void Run([EventGridTrigger] EventGridEvent eventGridEvent, ILogger log)
 		{
-			log.LogInformation(eventGridEvent.Data.ToString());
+			//log.LogInformation(eventGridEvent.Data.ToString());
 			IncomingSMSMessage incomingMessage = JsonConvert.DeserializeObject<IncomingSMSMessage>(eventGridEvent.Data.ToString());
-			_smsService.ProcessIncomingMessage(incomingMessage);
+			log.LogWarning(_smsService.ProcessIncomingMessage(incomingMessage));
 		}
 
 	}
